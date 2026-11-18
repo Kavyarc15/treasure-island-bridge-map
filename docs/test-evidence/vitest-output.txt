@@ -1,0 +1,168 @@
+
+ RUN  v2.1.9 /home/claude/treasure-island-bridge-map
+
+ ✓ tests/lowlink.rules.test.ts > back-connection low propagation > a back edge lowers low of the node that sees it
+ ✓ tests/lowlink.rules.test.ts > back-connection low propagation > the lowered value propagates up through tree edges
+ ✓ tests/lowlink.rules.test.ts > back-connection low propagation > a loop to the root travels all the way up a ring of four
+ ✓ tests/lowlink.rules.test.ts > back-connection low propagation > a back connection uses discovery[neighbour], NOT low[neighbour]
+ ✓ tests/lowlink.rules.test.ts > back-connection low propagation > the parent edge itself is not a back connection
+ ✓ tests/lowlink.rules.test.ts > strict bridge inequality: bridge iff low[child] > discovery[parent] > equal values are NOT a bridge (edge on a cycle back to the parent)
+ ✓ tests/lowlink.rules.test.ts > strict bridge inequality: bridge iff low[child] > discovery[parent] > equality on a deeper tree edge: low[TIDE]=5 == discovery[SHELL]=5 is not a bridge
+ ✓ tests/lowlink.rules.test.ts > strict bridge inequality: bridge iff low[child] > discovery[parent] > greater is a bridge (low[child] = discovery[child] > discovery[parent])
+ ✓ tests/lowlink.rules.test.ts > non-root articulation rule uses >= (not >) > B is an articulation point although its child edge B-C is not a bridge (low[C] == discovery[B])
+ ✓ tests/lowlink.rules.test.ts > non-root articulation rule uses >= (not >) > a node whose children all loop above it is NOT an articulation point
+ ✓ tests/lowlink.rules.test.ts > non-root articulation rule uses >= (not >) > leaf nodes are never articulation points
+ ✓ tests/lowlink.rules.test.ts > root child-count rule > a root with ONE tree child is not an articulation point (even though low[child] >= discovery[root])
+ ✓ tests/lowlink.rules.test.ts > root child-count rule > a root with TWO tree children is an articulation point
+ ✓ tests/lowlink.rules.test.ts > root child-count rule > a root of a ring has one tree child (the second neighbour is a back connection)
+ ✓ tests/lowlink.rules.test.ts > cycle-only graph > has no critical bridge and no articulation point
+ ✓ tests/lowlink.rules.test.ts > cycle-only graph > every island can reach the root, so every low is 0
+ ✓ tests/lowlink.rules.test.ts > root with two children + disconnected component + isolated node > three components; roots are chosen in ascending ID order
+ ✓ tests/lowlink.rules.test.ts > root with two children + disconnected component + isolated node > one discovery clock is shared across components
+ ✓ tests/lowlink.rules.test.ts > root with two children + disconnected component + isolated node > the root with two tree children is an articulation point; both spits are bridges
+ ✓ tests/lowlink.rules.test.ts > root with two children + disconnected component + isolated node > the isolated island is its own component with parent null and low == discovery
+ ✓ tests/lowlink.rules.test.ts > root with two children + disconnected component + isolated node > the triangle component has no critical items
+ ✓ tests/lowlink.rules.test.ts > ASCII ordering (never locale or natural sort) > compareIds / sortedIds use code-unit order: - < digits < letters < _
+ ✓ tests/lowlink.rules.test.ts > ASCII ordering (never locale or natural sort) > roots and neighbours are visited in ASCII order regardless of source order
+ ✓ tests/lowlink.rules.test.ts > component / root ordering when IDs are listed in reverse > starts at the smallest unvisited ID each time
+ ✓ tests/lowlink.rules.test.ts > smallest legal graphs > one node, zero edges is valid: one component, nothing critical
+ ✓ tests/lowlink.rules.test.ts > smallest legal graphs > twelve nodes and twenty edges are valid
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > meets the size and shape rules of the main demonstration
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > sorted adjacency lists
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > discovery order
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > parent / discovery / low table
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > component count, bridge IDs, articulation IDs
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > has the documented number of events
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > matches the hand-traced events at key positions (docs/oracle.md trace)
+ ✓ tests/engine.main.test.ts > main archipelago reproduces the independently documented oracle > event type counts
+ ✓ tests/engine.main.test.ts > the application never reads the oracle > no source file under src/ imports from tests/ or mentions the oracle module
+ ✓ tests/engine.main.test.ts > input order and map position never change the result > reversed node and edge arrays
+ ✓ tests/engine.main.test.ts > input order and map position never change the result > many seeded shuffles, with swapped edge endpoints and different coordinates
+ ✓ tests/engine.main.test.ts > analysis does not mutate its input and is repeatable > frozen input works and two runs are identical
+ ✓ tests/engine.main.test.ts > every visible low update and classification agrees with the final result > the last low shown for each node is its final table low
+ ✓ tests/engine.main.test.ts > every visible low update and classification agrees with the final result > low never increases for a node
+ ✓ tests/engine.main.test.ts > every visible low update and classification agrees with the final result > CLASSIFY_EDGE and ARTICULATION events agree with the final lists
+ ✓ tests/engine.main.test.ts > every visible low update and classification agrees with the final result > folding all events reproduces the table, component count and summaries
+ ✓ tests/engine.main.test.ts > every visible low update and classification agrees with the final result > pre-traversal state shows nothing discovered
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'duplicate node ID'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'coordinate out of range (x = 140)'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'unknown endpoint'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'self-loop'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'duplicate connection (same pair, reve…'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'coordinate below range (y = -1)'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'coordinate above range (x = 101)'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'NaN coordinate'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'Infinity coordinate'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'coordinate that is not a number'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'lowercase node ID'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'node ID longer than 16 chars'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'node ID starting with a digit'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'empty node name'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'whitespace-only node name'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'zero nodes'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'thirteen nodes'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'twenty-one edges'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'bad edge ID'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'duplicate edge ID'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'unknown first endpoint'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'duplicate connection (same direction)'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'not an object'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'missing edges array'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > 'null'
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > never throws on garbage
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > reports all problems, nodes first then edges
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > valid boundary values pass: coordinates 0 and 100, 16-char IDs, - and _ in IDs
+ ✓ tests/validation.test.ts > validation identifies the offending node, edge or endpoint > a valid graph passes
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'duplicate node ID'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'coordinate out of range (x = 140)'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'unknown endpoint'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'self-loop'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'duplicate connection (same pair, reve…'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'coordinate below range (y = -1)'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'coordinate above range (x = 101)'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'NaN coordinate'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'Infinity coordinate'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'coordinate that is not a number'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'lowercase node ID'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'node ID longer than 16 chars'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'node ID starting with a digit'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'empty node name'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'whitespace-only node name'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'zero nodes'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'thirteen nodes'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'twenty-one edges'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'bad edge ID'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'duplicate edge ID'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'unknown first endpoint'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'duplicate connection (same direction)'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'not an object'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'missing edges array'
+ ✓ tests/validation.test.ts > invalid input produces no partial analysis > analyzeGraph returns errors only: 'null'
+ ✓ tests/validation.test.ts > invalid input clears stale replay and results (no retained output) > after a half-finished valid run, loading out-of-range coordinate wipes everything
+ ✓ tests/validation.test.ts > invalid input clears stale replay and results (no retained output) > after a half-finished valid run, loading duplicate node ID wipes everything
+ ✓ tests/validation.test.ts > invalid input clears stale replay and results (no retained output) > after a half-finished valid run, loading unknown endpoint wipes everything
+ ✓ tests/validation.test.ts > invalid input clears stale replay and results (no retained output) > after a half-finished valid run, loading self-loop wipes everything
+ ✓ tests/validation.test.ts > invalid input clears stale replay and results (no retained output) > after a half-finished valid run, loading duplicate connection wipes everything
+ ✓ tests/validation.test.ts > invalid input clears stale replay and results (no retained output) > a valid load after an invalid one starts clean and clears the errors
+ ✓ tests/events.test.ts > event ordering (main) > indices are consecutive from 0 and FINISH is the single last event
+ ✓ tests/events.test.ts > event ordering (main) > each component: COMPONENT_START, then DISCOVER of that root, ..., COMPONENT_COMPLETE
+ ✓ tests/events.test.ts > event ordering (main) > a tree INSPECT_EDGE is immediately followed by DISCOVER of the child
+ ✓ tests/events.test.ts > event ordering (main) > after a child finishes: NODE_COMPLETE(child) < RETURN_FROM_CHILD, then CLASSIFY_EDGE right after
+ ✓ tests/events.test.ts > event ordering (main) > the root articulation event comes right before the root NODE_COMPLETE
+ ✓ tests/events.test.ts > event ordering (main) > every undirected bridge is inspected exactly twice, once from each end
+ ✓ tests/events.test.ts > event ordering (main) > a node is completed only after all of its own INSPECT_EDGE events
+ ✓ tests/events.test.ts > event ordering (main) > events are plain data: running twice gives deep-equal histories
+ ✓ tests/events.test.ts > event ordering (cycle-only) > indices are consecutive from 0 and FINISH is the single last event
+ ✓ tests/events.test.ts > event ordering (cycle-only) > each component: COMPONENT_START, then DISCOVER of that root, ..., COMPONENT_COMPLETE
+ ✓ tests/events.test.ts > event ordering (cycle-only) > a tree INSPECT_EDGE is immediately followed by DISCOVER of the child
+ ✓ tests/events.test.ts > event ordering (cycle-only) > after a child finishes: NODE_COMPLETE(child) < RETURN_FROM_CHILD, then CLASSIFY_EDGE right after
+ ✓ tests/events.test.ts > event ordering (cycle-only) > the root articulation event comes right before the root NODE_COMPLETE
+ ✓ tests/events.test.ts > event ordering (cycle-only) > every undirected bridge is inspected exactly twice, once from each end
+ ✓ tests/events.test.ts > event ordering (cycle-only) > a node is completed only after all of its own INSPECT_EDGE events
+ ✓ tests/events.test.ts > event ordering (cycle-only) > events are plain data: running twice gives deep-equal histories
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > indices are consecutive from 0 and FINISH is the single last event
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > each component: COMPONENT_START, then DISCOVER of that root, ..., COMPONENT_COMPLETE
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > a tree INSPECT_EDGE is immediately followed by DISCOVER of the child
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > after a child finishes: NODE_COMPLETE(child) < RETURN_FROM_CHILD, then CLASSIFY_EDGE right after
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > the root articulation event comes right before the root NODE_COMPLETE
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > every undirected bridge is inspected exactly twice, once from each end
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > a node is completed only after all of its own INSPECT_EDGE events
+ ✓ tests/events.test.ts > event ordering (root+disconnected+isolated) > events are plain data: running twice gives deep-equal histories
+ ✓ tests/events.test.ts > inspect kinds on the main graph > records tree, parent and already-visited connections
+ ✓ tests/events.test.ts > inspect kinds on the main graph > an ancestor that meets an already-discovered descendant records "visited" with no low change
+ ✓ tests/events.test.ts > describeEvent states the numerical change > visited-connection low update shows old -> new
+ ✓ tests/events.test.ts > describeEvent states the numerical change > return shows min() with both values
+ ✓ tests/events.test.ts > describeEvent states the numerical change > bridge classification states the strict inequality
+ ✓ tests/events.test.ts > describeEvent states the numerical change > the equal case reads "not a bridge" but the next event reads articulation (>=)
+ ✓ tests/events.test.ts > describeEvent states the numerical change > root articulation states the child count
+ ✓ tests/events.test.ts > describeEvent states the numerical change > every event has a headline and the text is repeatable
+ ✓ tests/events.test.ts > cross-checks against independent implementations > main graph: iterative reference and brute-force definition agree with the engine
+ ✓ tests/events.test.ts > cross-checks against independent implementations > 500 seeded random graphs (1-12 nodes, 0-20 edges): table, bridges, articulation points, components
+ ✓ tests/controller.test.ts > Load My Archipelago > loads in one action into the pre-traversal state
+ ✓ tests/controller.test.ts > Load My Archipelago > nothing is shown before anything is loaded; the controls do nothing
+ ✓ tests/controller.test.ts > Step > advances exactly one recorded event each time and stops at the end
+ ✓ tests/controller.test.ts > Run to End uses the same sequence as Step > ends in exactly the same state as stepping one by one
+ ✓ tests/controller.test.ts > Run to End uses the same sequence as Step > works from the middle of a replay, too
+ ✓ tests/controller.test.ts > Run to End uses the same sequence as Step > keeps the whole event history available and the final summary correct
+ ✓ tests/controller.test.ts > Run to End uses the same sequence as Step > summaries grow monotonically while stepping and are sorted at every moment
+ ✓ tests/controller.test.ts > Reset > after a partial run restores the pre-traversal state exactly
+ ✓ tests/controller.test.ts > Reset > after a complete run restores the pre-traversal state exactly
+ ✓ tests/controller.test.ts > Reset > restores the candidate-created graph exactly (the pristine graph is frozen and unchanged)
+ ✓ tests/controller.test.ts > Reset > is idempotent
+ ✓ tests/controller.test.ts > repeated stepped and complete runs produce identical histories and results > stepped, reset, complete, reset, stepped again
+ ✓ tests/controller.test.ts > repeated stepped and complete runs produce identical histories and results > every intermediate state is identical across two stepped runs
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > main archipelago
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > ring
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > root + disconnected + isolated
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > extreme corners
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > single node
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > all on one horizontal line
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > two nodes very close
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > preserves left/right and up/down order of the layout
+ ✓ tests/map.test.ts > map projection keeps every island visible (coordinates 0..100 are all legal) > is deterministic and independent of node array order
+
+ Test Files  6 passed (6)
+      Tests  159 passed (159)
+   Start at  20:35:47
+   Duration  2.52s (transform 333ms, setup 0ms, collect 504ms, tests 441ms, environment 1ms, prepare 449ms)
+

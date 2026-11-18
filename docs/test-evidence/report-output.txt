@@ -1,0 +1,98 @@
+=== Sorted adjacency lists ===
+ANCHOR : HARBOR(BR01) MANGO(BR03) REEF(BR05)
+HARBOR : ANCHOR(BR01) KELP(BR02)
+KELP   : HARBOR(BR02)
+MANGO  : ANCHOR(BR03) REEF(BR04)
+PEARL  : TIDE(BR10)
+REEF   : ANCHOR(BR05) MANGO(BR04) SHELL(BR06)
+SHELL  : REEF(BR06) TIDE(BR07) WAVE(BR09)
+TIDE   : PEARL(BR10) SHELL(BR07) WAVE(BR08)
+WAVE   : SHELL(BR09) TIDE(BR08)
+
+=== Discovery order ===
+ANCHOR, HARBOR, KELP, MANGO, REEF, SHELL, TIDE, PEARL, WAVE
+
+=== Parent / discovery / low table ===
+ID      PARENT   DISC LOW
+ANCHOR  null        0   0
+HARBOR  ANCHOR      1   1
+KELP    HARBOR      2   2
+MANGO   ANCHOR      3   0
+PEARL   TIDE        7   7
+REEF    MANGO       4   0
+SHELL   REEF        5   5
+TIDE    SHELL       6   5
+WAVE    TIDE        8   5
+
+=== Component count ===
+1
+
+=== Bridge IDs (sorted) ===
+BR01, BR02, BR06, BR10
+
+=== Articulation IDs (sorted) ===
+ANCHOR, HARBOR, REEF, SHELL, TIDE
+
+=== Replay events (62) ===
+#00 COMPONENT_START    Start component 1 at Anchor Cove (ANCHOR)
+#01 DISCOVER           Enter Anchor Cove (ANCHOR)   [discovery[ANCHOR] = low[ANCHOR] = 0]
+#02 INSPECT_EDGE       Cross bridge BR01: ANCHOR → HARBOR   [low[ANCHOR] stays 0 for now]
+#03 DISCOVER           Enter Harbour Market (HARBOR)   [discovery[HARBOR] = low[HARBOR] = 1]
+#04 INSPECT_EDGE       Look back along BR01: HARBOR ↔ ANCHOR   [low[HARBOR] unchanged = 1]
+#05 INSPECT_EDGE       Cross bridge BR02: HARBOR → KELP   [low[HARBOR] stays 1 for now]
+#06 DISCOVER           Enter Kelp Karaoke Stage (KELP)   [discovery[KELP] = low[KELP] = 2]
+#07 INSPECT_EDGE       Look back along BR02: KELP ↔ HARBOR   [low[KELP] unchanged = 2]
+#08 NODE_COMPLETE      Finished KELP
+#09 RETURN_FROM_CHILD  Return from Kelp Karaoke Stage (KELP) to HARBOR   [low[HARBOR] = min(1, low[KELP] = 2) = 1]
+#10 CLASSIFY_EDGE      BR02 is a BRIDGE   [low[KELP] = 2 > discovery[HARBOR] = 1  → bridge]
+#11 ARTICULATION       Harbour Market (HARBOR) is an articulation island   [low[KELP] = 2 ≥ discovery[HARBOR] = 1  → articulation]
+#12 NODE_COMPLETE      Finished HARBOR
+#13 RETURN_FROM_CHILD  Return from Harbour Market (HARBOR) to ANCHOR   [low[ANCHOR] = min(0, low[HARBOR] = 1) = 0]
+#14 CLASSIFY_EDGE      BR01 is a BRIDGE   [low[HARBOR] = 1 > discovery[ANCHOR] = 0  → bridge]
+#15 INSPECT_EDGE       Cross bridge BR03: ANCHOR → MANGO   [low[ANCHOR] stays 0 for now]
+#16 DISCOVER           Enter Mango Mooring (MANGO)   [discovery[MANGO] = low[MANGO] = 3]
+#17 INSPECT_EDGE       Look back along BR03: MANGO ↔ ANCHOR   [low[MANGO] unchanged = 3]
+#18 INSPECT_EDGE       Cross bridge BR04: MANGO → REEF   [low[MANGO] stays 3 for now]
+#19 DISCOVER           Enter Reef Rotunda (REEF)   [discovery[REEF] = low[REEF] = 4]
+#20 INSPECT_EDGE       Connection BR05: REEF – ANCHOR (already visited)   [low[REEF] = min(4, discovery[ANCHOR] = 0) = 0]
+#21 INSPECT_EDGE       Look back along BR04: REEF ↔ MANGO   [low[REEF] unchanged = 0]
+#22 INSPECT_EDGE       Cross bridge BR06: REEF → SHELL   [low[REEF] stays 0 for now]
+#23 DISCOVER           Enter Shell Square (SHELL)   [discovery[SHELL] = low[SHELL] = 5]
+#24 INSPECT_EDGE       Look back along BR06: SHELL ↔ REEF   [low[SHELL] unchanged = 5]
+#25 INSPECT_EDGE       Cross bridge BR07: SHELL → TIDE   [low[SHELL] stays 5 for now]
+#26 DISCOVER           Enter Tidewater Terrace (TIDE)   [discovery[TIDE] = low[TIDE] = 6]
+#27 INSPECT_EDGE       Cross bridge BR10: TIDE → PEARL   [low[TIDE] stays 6 for now]
+#28 DISCOVER           Enter Pearl Point (PEARL)   [discovery[PEARL] = low[PEARL] = 7]
+#29 INSPECT_EDGE       Look back along BR10: PEARL ↔ TIDE   [low[PEARL] unchanged = 7]
+#30 NODE_COMPLETE      Finished PEARL
+#31 RETURN_FROM_CHILD  Return from Pearl Point (PEARL) to TIDE   [low[TIDE] = min(6, low[PEARL] = 7) = 6]
+#32 CLASSIFY_EDGE      BR10 is a BRIDGE   [low[PEARL] = 7 > discovery[TIDE] = 6  → bridge]
+#33 ARTICULATION       Tidewater Terrace (TIDE) is an articulation island   [low[PEARL] = 7 ≥ discovery[TIDE] = 6  → articulation]
+#34 INSPECT_EDGE       Look back along BR07: TIDE ↔ SHELL   [low[TIDE] unchanged = 6]
+#35 INSPECT_EDGE       Cross bridge BR08: TIDE → WAVE   [low[TIDE] stays 6 for now]
+#36 DISCOVER           Enter Wave Walk (WAVE)   [discovery[WAVE] = low[WAVE] = 8]
+#37 INSPECT_EDGE       Connection BR09: WAVE – SHELL (already visited)   [low[WAVE] = min(8, discovery[SHELL] = 5) = 5]
+#38 INSPECT_EDGE       Look back along BR08: WAVE ↔ TIDE   [low[WAVE] unchanged = 5]
+#39 NODE_COMPLETE      Finished WAVE
+#40 RETURN_FROM_CHILD  Return from Wave Walk (WAVE) to TIDE   [low[TIDE] = min(6, low[WAVE] = 5) = 5]
+#41 CLASSIFY_EDGE      BR08 is not a bridge   [low[WAVE] = 5 ≤ discovery[TIDE] = 6  → not a bridge]
+#42 NODE_COMPLETE      Finished TIDE
+#43 RETURN_FROM_CHILD  Return from Tidewater Terrace (TIDE) to SHELL   [low[SHELL] = min(5, low[TIDE] = 5) = 5]
+#44 CLASSIFY_EDGE      BR07 is not a bridge   [low[TIDE] = 5 ≤ discovery[SHELL] = 5  → not a bridge]
+#45 ARTICULATION       Shell Square (SHELL) is an articulation island   [low[TIDE] = 5 ≥ discovery[SHELL] = 5  → articulation]
+#46 INSPECT_EDGE       Connection BR09: SHELL – WAVE (already visited)   [low[SHELL] = min(5, discovery[WAVE] = 8) = 5]
+#47 NODE_COMPLETE      Finished SHELL
+#48 RETURN_FROM_CHILD  Return from Shell Square (SHELL) to REEF   [low[REEF] = min(0, low[SHELL] = 5) = 0]
+#49 CLASSIFY_EDGE      BR06 is a BRIDGE   [low[SHELL] = 5 > discovery[REEF] = 4  → bridge]
+#50 ARTICULATION       Reef Rotunda (REEF) is an articulation island   [low[SHELL] = 5 ≥ discovery[REEF] = 4  → articulation]
+#51 NODE_COMPLETE      Finished REEF
+#52 RETURN_FROM_CHILD  Return from Reef Rotunda (REEF) to MANGO   [low[MANGO] = min(3, low[REEF] = 0) = 0]
+#53 CLASSIFY_EDGE      BR04 is not a bridge   [low[REEF] = 0 ≤ discovery[MANGO] = 3  → not a bridge]
+#54 NODE_COMPLETE      Finished MANGO
+#55 RETURN_FROM_CHILD  Return from Mango Mooring (MANGO) to ANCHOR   [low[ANCHOR] = min(0, low[MANGO] = 0) = 0]
+#56 CLASSIFY_EDGE      BR03 is not a bridge   [low[MANGO] = 0 ≤ discovery[ANCHOR] = 0  → not a bridge]
+#57 INSPECT_EDGE       Connection BR05: ANCHOR – REEF (already visited)   [low[ANCHOR] = min(0, discovery[REEF] = 4) = 0]
+#58 ARTICULATION       Anchor Cove (ANCHOR) is an articulation island (root)   [root ANCHOR has 2 DFS-tree children (needs ≥ 2)  → articulation]
+#59 NODE_COMPLETE      Finished ANCHOR
+#60 COMPONENT_COMPLETE Component 1 complete
+#61 FINISH             Inspection complete

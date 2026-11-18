@@ -1,0 +1,14 @@
+components      : 1
+discovery order : ['ANCHOR', 'HARBOR', 'KELP', 'MANGO', 'REEF', 'SHELL', 'TIDE', 'PEARL', 'WAVE']
+ANCHOR  parent=None disc=0 low=0
+HARBOR  parent=ANCHOR disc=1 low=1
+KELP    parent=HARBOR disc=2 low=2
+MANGO   parent=ANCHOR disc=3 low=0
+PEARL   parent=TIDE disc=7 low=7
+REEF    parent=MANGO disc=4 low=0
+SHELL   parent=REEF disc=5 low=5
+TIDE    parent=SHELL disc=6 low=5
+WAVE    parent=TIDE disc=8 low=5
+bridges (by definition)     : ['BR01', 'BR02', 'BR06', 'BR10']
+articulation (by definition): ['ANCHOR', 'HARBOR', 'REEF', 'SHELL', 'TIDE']
+ORACLE CHECK PASSED

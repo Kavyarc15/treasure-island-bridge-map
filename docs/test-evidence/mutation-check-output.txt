@@ -1,0 +1,18 @@
+baseline:
+      Tests  159 passed (159)
+M1 bridge uses >= instead of > (strict rule)
+      Tests  13 failed | 146 passed (159)
+M2 non-root articulation uses > instead of >=
+      Tests  13 failed | 146 passed (159)
+M3 root articulation needs 1 child instead of 2
+      Tests  8 failed | 151 passed (159)
+M4 back edge uses low[neighbour] instead of discovery
+      Tests  2 failed | 157 passed (159)
+M5 discovery clock reset for every component
+      Tests  3 failed | 156 passed (159)
+M6 roots chosen in descending order
+      Tests  25 failed | 134 passed (159)
+M7 neighbours not sorted (source order)
+      Tests  16 failed | 143 passed (159)
+restored:
+      Tests  159 passed (159)
